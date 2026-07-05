@@ -1,0 +1,192 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #f1f5f9; /* Soft, light gray background */
+    color: #1e293b; /* Deep slate gray for primary text */
+    padding: 40px 20px;
+}
+
+.heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.headingtext {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1e3a8a; /* Clean, appealing Deep Corporate Blue */
+    letter-spacing: -0.5px;
+}
+
+/* Layout Wrapper */
+.idk {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    max-width: 900px;
+    margin: 0 auto;
+    align-items: stretch; /* Keeps both columns balanced in height */
+}
+
+.left {
+    flex: 0 0 380px;
+}
+
+.right {
+    flex: 0 0 380px;
+    background-color: #ffffff; /* Crisp White Card */
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Soft, elegant shadow */
+    border: 1px solid #e2e8f0;
+}
+
+/* Left Form Styling */
+.formplace {
+    background: #ffffff; /* Crisp White Card to match the right side */
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+/* Remove old fieldset borders cleanly */
+.fieldset {
+    border: none;
+    padding: 0;
+}
+
+.formname {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1e3a8a; /* Matching deep blue */
+    margin-bottom: 20px;
+    padding: 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    color: #64748b; /* Muted text color for labels */
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Modern Input Fields */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #cbd5e1; /* Clean grey borders */
+    border-radius: 8px;
+    background: #f8fafc; /* Slightly off-white for contrast inside fields */
+    color: #0f172a;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #2563eb; /* Energetic Blue focus ring */
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* The primary Action Button */
+.btn {
+    width: 100%;
+    padding: 14px;
+    background: #2563eb; /* Trustworthy, vibrant Blue */
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn:hover {
+    background: #1d4ed8; /* Darker blue on hover */
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Remove number spin arrows */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* Right Side - Total Display */
+.total {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+
+/* Expense List Container */
+.rslt {
+    flex: 1;
+    overflow-y: auto;
+    margin: 0;
+    max-width: none;
+    padding-right: 4px;
+}
+
+/* Individual Expense Row */
+.rslt div {
+    background: #f8fafc; /* Inset color to make items stand out */
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e2e8f0;
+    color: #334155;
+}
+
+/* Delete Button */
+.rslt button {
+    background: #ef4444; /* Clean modern red */
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.rslt button:hover {
+    background: #dc2626;
+}
+
+/* Scrollbar Tweaks */
+.rslt::-webkit-scrollbar {
+    width: 6px;
+}
+.rslt::-webkit-scrollbar-track {
+    background: transparent;
+}
+.rslt::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}

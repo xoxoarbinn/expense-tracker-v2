@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Expense tracker</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+	
+	<div class="heading">
+		<div class="headingtext">Expense tracker</div>
+	</div>
+
+	<div class="idk">
+		<div class="left">
+			<div class="formplace">
+				<form action="" class="form">
+					<fieldset class="fieldset">
+						<legend class="formname">Enter your expenses</legend>
+
+						<label for="exname">Expenses Name:</label>
+						<input type="text" id="exname" required><br><br>
+
+						<label for="amt">Amount:</label>
+						<input type="number" min="0" max="99999999.99" id="amt" required> <br><br>
+
+
+						<select id="category">
+							<option value="Food" >Food</option>
+							<option value="Transport" >Transport</option>
+							<option value="School" >School</option>
+							<option value="Other">Other</option>
+						</select>
+
+						<button class="btn" type="button" id="addBtn">ADD EXPENSE</button>
+
+
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		<div class="right">
+			<div class="total">Total: <span id="totalAmount">0</span></div>
+			<div class="rslt" id="expenseList"></div>
+
+		</div>
+	</div>
+
+
+	<script src="script.js"></script>
+</body>
+</html>
