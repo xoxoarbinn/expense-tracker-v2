@@ -1,14 +1,15 @@
 const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
+const { Low } = require('lowdb');
+const { JSONFile } = require('lowdb/node');
 const path = require('path');
 
 const app = express();
 app.use(express.json());
 
-// Serve your HTML/CSS/JS files
+// Serve static files (your HTML/CSS/JS)
 app.use(express.static(path.join(__dirname)));
 
-// Allow frontend to talk to backend (CORS)
+// CORS
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
@@ -17,71 +18,71 @@ app.use((req, res, next) => {
 });
 
 // ============================================
-// DATABASE
+// DATABASE (lowdb - JSON file)
 // ============================================
 
-const db = new sqlite3.Database('./expenses.db');
+const adapter = new JSONFile('db.json');
+const db = new Low(adapter, { expenses: [] });
 
-db.run(`
-    CREATE TABLE IF NOT EXISTS expenses (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        amount REAL,
-        category TEXT,
-        date TEXT
-    )
-`);
+// Load database
+async function initDb() {
+    await db.read();
+    db.data = db.data || { expenses: [] };
+    await db.write();
+}
+initDb();
 
 // ============================================
 // ROUTES
 // ============================================
 
+// Test route
 app.get('/hello', (req, res) => {
     res.json({ message: 'Server is alive!' });
 });
 
-app.get('/expenses', (req, res) => {
-    db.all('SELECT * FROM expenses', [], (err, rows) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json(rows);
-    });
+// GET all expenses
+app.get('/expenses', async (req, res) => {
+    await db.read();
+    res.json(db.data.expenses);
 });
 
-app.post('/expenses', (req, res) => {
+// POST new expense
+app.post('/expenses', async (req, res) => {
     const { name, amount, category } = req.body;
     const date = new Date().toLocaleDateString();
 
-    db.run(
-        'INSERT INTO expenses (name, amount, category, date) VALUES (?, ?, ?, ?)',
-        [name, amount, category, date],
-        function(err) {
-            if (err) {
-                res.status(500).json({ error: err.message });
-                return;
-            }
-            res.json({ id: this.lastID, name, amount, category, date });
-        }
-    );
+    const expense = {
+        id: Date.now(),
+        name,
+        amount,
+        category,
+        date
+    };
+
+    await db.read();
+    db.data.expenses.push(expense);
+    await db.write();
+
+    res.json(expense);
 });
 
-app.delete('/expenses/:id', (req, res) => {
-    const id = req.params.id;
-    db.run('DELETE FROM expenses WHERE id = ?', [id], function(err) {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json({ message: 'Deleted' });
-    });
+// DELETE expense
+app.delete('/expenses/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
+
+    await db.read();
+    db.data.expenses = db.data.expenses.filter(e => e.id !== id);
+    await db.write();
+
+    res.json({ message: 'Deleted' });
 });
 
 // ============================================
 // START
 // ============================================
 
-app.listen(3000, () => {
-    console.log('Server running at http://localhost:3000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });

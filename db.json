@@ -1,0 +1,25 @@
+{
+  "expenses": [
+    {
+      "id": 1783242409963,
+      "name": "21",
+      "amount": 21,
+      "category": "Food",
+      "date": "7/5/2026"
+    },
+    {
+      "id": 1783242410223,
+      "name": "21",
+      "amount": 21,
+      "category": "Food",
+      "date": "7/5/2026"
+    },
+    {
+      "id": 1783242431509,
+      "name": "21",
+      "amount": 21,
+      "category": "Food",
+      "date": "7/5/2026"
+    }
+  ]
+}
