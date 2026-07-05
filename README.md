@@ -24,3 +24,6 @@ A full-stack expense tracking application built with Node.js, Express, SQLite, a
 - SQLite database operations (CRUD)
 - Connecting frontend to backend with fetch API
 - Handling CORS for local development
+
+## Live Demo
+- Live Demo: https://expense-tracker-v2-k8f1.onrender.com/
